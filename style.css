@@ -6,9 +6,6 @@ header {
   outline-color: #FF0000;
   outline-style: outset;
 }
-footer {
-  background-image: url("cell.png");
-}
 
 h1 {
   color: white;
@@ -27,8 +24,8 @@ p {
 }
 #counter {
   font-size: 5rem;
-  color: hotpink;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #ff69b4;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   text-align: center;
   margin-top: 30px;
 
