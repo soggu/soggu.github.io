@@ -2,8 +2,8 @@ body {
   background-image: url("icon.jpg");
 }
 header {
-  background-color: navy;
-  outline-color: red;
+  background-color: #000080;
+  outline-color: #FF0000;
   outline-style: outset;
 }
 footer {
