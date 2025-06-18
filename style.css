@@ -16,6 +16,7 @@ h2{
   font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 p {
+  font-size: 30px;
   color: hotpink;
   text-shadow: 2px 2px 5px white;
   text-decoration-line: underline;
