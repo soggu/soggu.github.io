@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>soggu.party</title>
+    <link rel="icon" type="image/x-icon" href="icon.jpg">
+    <!-- you should die for looking in here -->
+  </head>
+  <body>
+
+
+
+<h1>cool new multiplayer mode</h1>
+<button id="clickButton">Click Me!</button>
+<div id="counter">Current Count: 0</div>
+
+
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+
+<script>
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyD8Z6kvjomB1bJ4FcFm1916CaswoS3343w",
+  authDomain: "soggupartyclicker.firebaseapp.com",
+  databaseURL: "https://soggupartyclicker-default-rtdb.firebaseio.com",
+  projectId: "soggupartyclicker",
+  storageBucket: "soggupartyclicker.firebasestorage.app",
+  messagingSenderId: "71673834411",
+  appId: "1:71673834411:web:9a8814e3b3ce392659c0ee"
+};
+
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.database(app);
+
+// Reference to the counter in Firebase
+const counterRef = db.ref('counter');
+
+// Update the counter display from Firebase
+function updateCounter() {
+    counterRef.get().then((snapshot) => {
+        if (snapshot.exists()) {
+            document.getElementById('counter').textContent = 'Current Count: ' + snapshot.val();
+        }
+    });
+}
+
+// Event listener for the click button
+document.getElementById('clickButton').addEventListener('click', () => {
+    counterRef.transaction(currentCount => {
+        return (currentCount || 0) + 1;
+    }).then(() => {
+        updateCounter(); // Update the displayed count
+    });
+});
+
+// Initial counter fetch
+updateCounter();
+</script>
+
+</body>
+
+</html>
