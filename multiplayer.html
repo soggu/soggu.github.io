@@ -1,67 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <title>soggu.party</title>
-    <link rel="icon" type="image/x-icon" href="icon.jpg">
-    <!-- you should die for looking in here -->
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <title>soggu.party</title>
+  <link rel="icon" type="image/x-icon" href="icon.jpg">
+</head>
+<body>
+<a href="index.html"><h2>HOMER</h2></a>
+<br>
+<center><h1>cool new multiplayer mode</h1>
+<button id="clickButton">Click Me!</button></center>
+<div id="counter">global kliks: 0</div>
 
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+  import { getDatabase, ref, runTransaction, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyD8Z6kvjomB1bJ4FcFm1916CaswoS3343w",
+    authDomain: "soggupartyclicker.firebaseapp.com",
+    databaseURL: "https://soggupartyclicker-default-rtdb.firebaseio.com",
+    projectId: "soggupartyclicker",
+    storageBucket: "soggupartyclicker.firebasestorage.app",
+    messagingSenderId: "71673834411",
+    appId: "1:71673834411:web:9a8814e3b3ce392659c0ee"
+  };
 
-<h1>cool new multiplayer mode</h1>
-<button id="clickButton">Click Me!</button>
-<div id="counter">Current Count: 0</div>
+  // Initialize Firebase app and database
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
+  // Reference to the counter
+  const counterRef = ref(db, 'counter');
 
+  // Real-time listener for counter changes
+  onValue(counterRef, (snapshot) => {
+    const count = snapshot.val();
+    document.getElementById('counter').textContent = 'global kliks: ' + (count ?? 0);
+  });
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
-
-<script>
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyD8Z6kvjomB1bJ4FcFm1916CaswoS3343w",
-  authDomain: "soggupartyclicker.firebaseapp.com",
-  databaseURL: "https://soggupartyclicker-default-rtdb.firebaseio.com",
-  projectId: "soggupartyclicker",
-  storageBucket: "soggupartyclicker.firebasestorage.app",
-  messagingSenderId: "71673834411",
-  appId: "1:71673834411:web:9a8814e3b3ce392659c0ee"
-};
-
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.database(app);
-
-// Reference to the counter in Firebase
-const counterRef = db.ref('counter');
-
-// Update the counter display from Firebase
-function updateCounter() {
-    counterRef.get().then((snapshot) => {
-        if (snapshot.exists()) {
-            document.getElementById('counter').textContent = 'Current Count: ' + snapshot.val();
-        }
+  // Event listener for the click button
+  document.getElementById('clickButton').addEventListener('click', async () => {
+    await runTransaction(counterRef, (current) => {
+      return (current || 0) + 1;
     });
-}
-
-// Event listener for the click button
-document.getElementById('clickButton').addEventListener('click', () => {
-    counterRef.transaction(currentCount => {
-        return (currentCount || 0) + 1;
-    }).then(() => {
-        updateCounter(); // Update the displayed count
-    });
-});
-
-// Initial counter fetch
-updateCounter();
+  });
 </script>
 
 </body>
-
 </html>
