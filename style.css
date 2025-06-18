@@ -23,6 +23,9 @@ p {
   text-decoration-color: red;
   text-decoration-style: wavy;
 }
+#pedestal {
+  padding-top: 20%
+}
 #counter {
   font-size: 5rem;
   color: #ff69b4;
