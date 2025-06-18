@@ -1,0 +1,20 @@
+body {
+  background-image: url("icon.jpg");
+}
+
+h1 {
+  color: white;
+  size: 80px;
+  text-shadow: 2px 2px 5px yellow;
+}
+p {
+  color: hotpink;
+  text-shadow: 2px 2px 5px white;
+  text-decoration-line: underline;
+  text-decoration-color: red;
+  text-decoration-style: wavy;
+}
+h1.headline {
+  outline-color: red;
+  outline-style: outset;
+}
