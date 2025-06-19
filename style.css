@@ -7,6 +7,12 @@ header {
   outline-style: outset;
 }
 
+
+
+.bannerlinks {
+  display: flex;
+  justify-content: space-evenly;
+}
 h1 {
   color: white;
   size: 80px;
@@ -30,9 +36,14 @@ p {
   text-decoration-color: red;
   text-decoration-style: wavy;
 }
-#pedestal {
-  padding-top: 20%
+.pedestal {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 0px;
+  align-items: flex-end;
 }
+
 #counter {
   font-size: 5rem;
   color: #ff69b4;
